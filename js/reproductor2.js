@@ -51,6 +51,42 @@ $.ajax({
         success: function (response) {
             console.log(response);
             let {preview_url, album, name, artists} = response;
+              // ***** AQUÍ ES DONDE DEBES HACER LA VERIFICACIÓN *****
+            if (preview_url) { // Si preview_url NO es null
+                $("#contenedorAlbumImagen").attr("src",album.images[0].url);
+                trackUrl.push(preview_url); // Agregas la URL solo si existe
+                $('.card-title').text(name);
+                $('.card-text').text(artists[0].name);
+                initPlayer(); // Y solo entonces inicializas el reproductor para intentar reproducir
+            } else {
+                // Si preview_url ES null, manejas el caso
+                console.warn("No hay previsualización disponible para esta canción.");
+                // Aquí puedes:
+                // 1. Mostrar un mensaje en la interfaz de usuario.
+                //    Ej: $('#track-name').text(name + " (Previsualización no disponible)");
+                // 2. Deshabilitar el botón de play.
+                //    Ej: $('#play-pause-button').prop('disabled', true);
+                // 3. Mostrar un botón para abrir en Spotify.
+                //    Ej: $('#some-div').html('<a href="' + response.external_urls.spotify + '" target="_blank">Escuchar en Spotify</a>');
+                
+                // Aun así puedes mostrar la info de la canción, pero sin reproducirla.
+                $("#contenedorAlbumImagen").attr("src",album.images[0].url);
+                $('.card-title').text(name);
+                $('.card-text').text(artists[0].name);
+                // Inicializa el reproductor pero en estado pausado o inactivo, sin fuente de audio.
+                initPlayerNoAudio(); // Una función que solo actualice la UI sin intentar reproducir
+            }
+        },
+        error: function (error) {
+            console.error('Error al obtener los detalles de la canción:', error);
+            // Aquí también deberías manejar errores de la API, como tokens inválidos.
+            if (error.status === 401) {
+                // Mostrar un mensaje al usuario, o intentar refrescar el token si tienes un refresh_token
+                console.error("Token de Spotify no válido o expirado.");
+            }
+        }
+    });
+});
             $("#contenedorAlbumImagen").attr("src",album.images[0].url);
             trackUrl.push(preview_url);
             $('.card-title').text(name);
