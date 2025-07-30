@@ -28,7 +28,6 @@ function getParameterByName(name) {
     results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-var token;
 
 var idcancion = getParameterByName("idcancion");
 
@@ -36,8 +35,8 @@ $.ajax({
     url: 'https://accounts.spotify.com/api/token',
     method: 'POST',
     data: {
-        client_id: '259962f9c85b44e5866da2ab7d916aec',
-        client_secret: 'b176a8e3521a454da6079d3d62fd7f65',
+        client_id: '2dd273f1ae0c454c84e89c4e65997842',
+        client_secret: '199f94e4a7fb447cbafe8579bb247e90',
         grant_type: 'client_credentials'
     }
 }).always(function(resp){
@@ -50,47 +49,9 @@ $.ajax({
         },
         success: function (response) {
             console.log(response);
-            let {preview_url, album, name, artists} = response;
-              // ***** AQUÍ ES DONDE DEBES HACER LA VERIFICACIÓN *****
-            if (preview_url) { // Si preview_url NO es null
-                $("#contenedorAlbumImagen").attr("src",album.images[0].url);
-                trackUrl.push(preview_url); // Agregas la URL solo si existe
-                $('.card-title').text(name);
-                $('.card-text').text(artists[0].name);
-                initPlayer(); // Y solo entonces inicializas el reproductor para intentar reproducir
-            } else {
-                // Si preview_url ES null, manejas el caso
-                console.warn("No hay previsualización disponible para esta canción.");
-                // Aquí puedes:
-                // 1. Mostrar un mensaje en la interfaz de usuario.
-                //    Ej: $('#track-name').text(name + " (Previsualización no disponible)");
-                // 2. Deshabilitar el botón de play.
-                //    Ej: $('#play-pause-button').prop('disabled', true);
-                // 3. Mostrar un botón para abrir en Spotify.
-                //    Ej: $('#some-div').html('<a href="' + response.external_urls.spotify + '" target="_blank">Escuchar en Spotify</a>');
-                
-                // Aun así puedes mostrar la info de la canción, pero sin reproducirla.
-                $("#contenedorAlbumImagen").attr("src",album.images[0].url);
-                $('.card-title').text(name);
-                $('.card-text').text(artists[0].name);
-                // Inicializa el reproductor pero en estado pausado o inactivo, sin fuente de audio.
-                initPlayerNoAudio(); // Una función que solo actualice la UI sin intentar reproducir
-            }
-        },
-        error: function (error) {
-            console.error('Error al obtener los detalles de la canción:', error);
-            // Aquí también deberías manejar errores de la API, como tokens inválidos.
-            if (error.status === 401) {
-                // Mostrar un mensaje al usuario, o intentar refrescar el token si tienes un refresh_token
-                console.error("Token de Spotify no válido o expirado.");
-            }
-        }
-    });
-});
+            let {preview_url,album} = response;
             $("#contenedorAlbumImagen").attr("src",album.images[0].url);
             trackUrl.push(preview_url);
-            $('.card-title').text(name);
-            $('.card-text').text(artists[0].name);
             initPlayer();
         }
         
@@ -98,20 +59,23 @@ $.ajax({
 });    
 
 function playPause() {
-    if (audio.paused) {
-        playerTrack.addClass('active');
-        albumArt.addClass('active');
-        checkBuffering();
-        i.attr('class', 'fas fa-pause');
-        audio.play();
-    } else {
-        playerTrack.removeClass('active');
-        albumArt.removeClass('active');
-        clearInterval(buffInterval);
-        albumArt.removeClass('buffering');
-        i.attr('class', 'fas fa-play');
-        audio.pause();
-    }
+    setTimeout(function () {
+        if (audio.paused) {
+            playerTrack.addClass('active');
+            albumArt.addClass('active');
+            checkBuffering();
+            i.attr('class', 'fas fa-pause');
+            audio.play();
+        }
+        else {
+            playerTrack.removeClass('active');
+            albumArt.removeClass('active');
+            clearInterval(buffInterval);
+            albumArt.removeClass('buffering');
+            i.attr('class', 'fas fa-play');
+            audio.pause();
+        }
+    }, 300);
 }
 
 
@@ -287,26 +251,6 @@ function initPlayer() {
     selectTrack(0);
 
     audio.loop = false;
-    $.ajax({
-        url: `https://api.spotify.com/v1/tracks/${idcancion}`,
-        data: {
-            type: 'track',
-            access_token: token
-        },
-        success: function (response) {
-            // Rellenar los elementos en tu página de reproductor con la información obtenida
-            albumName.text(response.album.name);
-            trackName.text(response.name);
-           
-            $('.card .card-title').text(response.name);
-            albumArt.find('img.active').attr('src', response.album.images[0].url);
-           
-            // Si necesitas más información, puedes actualizar otros elementos también
-        },
-        error: function (error) {
-            console.error('Error al obtener los detalles de la canción:', error);
-        }
-    });
 
     playPauseButton.on('click', playPause);
 
