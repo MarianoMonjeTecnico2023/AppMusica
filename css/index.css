@@ -1,0 +1,241 @@
+/* Importación de fuente desde Google Fonts */
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,regular,italic,700,700italic");
+
+/* Variables para colores */
+:root {
+    --color-orange: #fe7f2d;
+    --color-black: #2a2d34;
+    --color-gray: #7e7f83;
+    --color-white: #eaeaea;
+}
+
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1.6rem;
+    background-color: var(--color-white);
+    font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+}
+
+/* Estilos para la sección de búsqueda */
+.contenedorBusqueda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    background: var(--color-black);
+    padding: 20px;
+}
+
+.contenedorBusqueda .titulobuscador {
+    font-size: 3.5em;
+    padding: 15px;
+    text-transform: uppercase;
+    color: var(--color-orange);
+}
+
+.contenedorBusqueda .titulobuscador span {
+    color: #df5801;
+}
+
+.contenedorBusqueda input {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 5px;
+    width: calc(100% - 20px);
+    padding: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    outline: none !important;
+    text-align: center;
+}
+
+.contenedorBusqueda button {
+    appearance: none;
+    -webkit-appearance: none;
+    margin-top: 10px;
+    padding: 15px;
+    width: calc(100% - 20px);
+    font-size: 1.5em;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    outline: none !important;
+    background-color: var(--color-orange);
+    color: var(--color-white);
+}
+
+/* Estilos para las columnas */
+#rp-q {
+    display: flex;
+    flex-wrap: wrap; /* Permitir que las columnas se envuelvan en filas en pantallas pequeñas */
+    justify-content: space-around;
+    align-items: stretch; /* Hacer que las columnas se estiren verticalmente para igualar la altura */
+    padding: 20px 10px;
+}
+
+#rp-q > div {
+    flex: 0 0 calc(33% - 20px); /* Calcular el ancho de cada columna con margen */
+    background: var(--color-black);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 10px 10px 0; /* Agregar margen y ajustar el margen derecho e inferior */
+    box-sizing: border-box; /* Ajustar el modelo de caja para incluir padding y border en el ancho total */
+}
+
+/* Media query para pantallas pequeñas (celulares) */
+@media (max-width: 767px) {
+    #rp-q > div {
+        flex: 0 0 calc(100% - 20px); /* En pantallas pequeñas, cada columna ocupa el 100% del ancho */
+    }
+}
+
+#rp-q .sin-datos {
+    color: var(--color-gray);
+    font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+}
+
+.tituloColumna {
+    display: block;
+    color: var(--color-white);
+    font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+/* Estilos para elementos de álbum, artista y canciones */
+.contenedor-album,
+.contenedor-artista,
+.contenedor-canciones {
+    margin: 6px;
+    padding: 8px;
+    border-radius: 8px;
+    font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    background: var(--color-black);
+}
+
+.contenedor-album img,
+.contenedor-artista img {
+    width: 22%;
+    border-radius: 6px;
+}
+
+.contenedor-album .contenedor-datos-album,
+.contenedor-artista .contenedor-artista-datos,
+.contenedor-canciones {
+    margin-left: 10px;
+}
+
+.contenedor-album .contenedor-datos-album h2,
+.contenedor-artista .contenedor-artista-datos h2 {
+    color: var(--color-white);
+    font-size: 1.5em;
+}
+
+.contenedor-album .contenedor-datos-album span,
+.contenedor-artista .contenedor-artista-datos span {
+    color: var(--color-white) !important;
+}
+
+/* Estilos para el botón */
+.boton {
+    text-decoration: blue !important;
+    padding: 10px !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+    color: var(--color-white);
+    background-color: #1883ba !important;
+    border-radius: 6px !important;
+    border: 2px solid #0016b0 !important;
+    text-align: center !important;
+    font-family: 'Roboto Condensed' !important;
+    width: 20% !important;
+    margin: 10px !important;
+}
+
+/* Estilos para el popup */
+.popupContenedor {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 99999999;
+    display: none;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.popupContenedor button {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.popupContenedor .popup {
+    position: relative;
+    background-color: var(--color-white);
+    width: 80vw;
+    height: 80vh;
+    padding: 50px;
+}
+
+.contenedor-canciones {
+    margin: 7px;
+    background: #4f5562;
+    padding: 8px;
+    font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+    border-radius: 8px;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    color: #fff; /* Añadido para asegurar que el texto sea blanco */
+}
+
+.contenedor-canciones h2,
+.contenedor-canciones span {
+    color: #fff !important;
+    font-size: 1.5em !important;
+}
+
+/* Estilos para iframe */
+iframe {
+    margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+    /* Estilos para pantallas más pequeñas (celulares) */
+    body {
+        font-size: 1.2rem; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+    }
+
+    .contenedorBusqueda input,
+    .contenedorBusqueda button {
+        width: 100%; /* Ajusta el ancho para ocupar toda la pantalla en dispositivos móviles */
+    }
+
+    #rp-q > div {
+        width: 100%; /* Ajusta el ancho para ocupar toda la pantalla en dispositivos móviles */
+        margin: 0 0 20px 0; /* Añade espacio entre los elementos */
+    }
+
+    .popupContenedor .popup {
+        width: 90%; /* Ajusta el ancho del popup para pantallas más pequeñas */
+        height: 90%; /* Ajusta la altura del popup para pantallas más pequeñas */
+        padding: 20px; /* Ajusta el padding */
+    }
+}
+
