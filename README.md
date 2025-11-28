@@ -505,4 +505,3 @@ jQuery
 
 
 Ahora combina la nostalgia del código original con APIs modernas. ¡Disfrutalo! 🎵
->>>>>>> d6ccd7a2e36c433996fe3c7469e7d5a44c85a7d9
