@@ -1,0 +1,377 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700");
+
+:root {
+    --color-orange: #fe7f2d;
+    --color-orange-dark: #df5801;
+    --color-black: #2a2d34;
+    --color-gray: #7e7f83;
+    --color-white: #eaeaea;
+    --color-card-bg: #4f5562;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1.2rem;
+    background-color: var(--color-white);
+    font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+}
+
+/* Header & Buscador */
+.contenedorBusqueda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-black);
+    padding: 20px;
+}
+
+.titulobuscador {
+    font-size: 3em;
+    padding: 10px;
+    text-transform: uppercase;
+    color: var(--color-orange);
+}
+
+.titulobuscador span {
+    color: var(--color-orange-dark);
+}
+
+.search-form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.search-form input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    outline: none;
+}
+
+.search-form button {
+    padding: 15px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-orange);
+    color: var(--color-white);
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.search-form button:hover {
+    background-color: var(--color-orange-dark);
+}
+
+/* Grid de 3 Columnas */
+#rp-q {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px 10px;
+    gap: 15px;
+}
+
+.columna {
+    flex: 1 1 calc(33% - 20px);
+    min-width: 280px;
+    background: var(--color-black);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.tituloColumna {
+    color: var(--color-white);
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--color-orange);
+    padding-bottom: 5px;
+}
+
+.sin-datos {
+    color: var(--color-gray);
+}
+
+/* Cards de Resultados */
+.contenedor-album, .contenedor-artista {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #1f2127;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.contenedor-album img, .contenedor-artista img {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.contenedor-album h2, .contenedor-artista h2 {
+    color: var(--color-white);
+    font-size: 1.2em;
+}
+
+.contenedor-album span, .contenedor-artista span {
+    color: var(--color-gray);
+    font-size: 0.9em;
+}
+
+.contenedor-canciones {
+    background: var(--color-card-bg);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.contenedor-canciones:hover {
+    transform: translateY(-2px);
+    background: #5d6473;
+}
+
+.contenedor-canciones h2 {
+    color: var(--color-white);
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.contenedor-canciones span {
+    display: block;
+    color: #e0e0e0;
+    font-size: 0.95em;
+}
+
+/* Popup / Modal */
+.popupContenedor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.popupContenedor.active {
+    display: flex;
+}
+
+.popup {
+    position: relative;
+    background-color: #2a2d34;
+    width: 90%;
+    max-width: 500px;
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.btn-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 35px;
+    height: 35px;
+    background: var(--color-orange);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* ===================================================
+   EL MONUMENTO AL VINILO (TUS 4 LITROS DE CAFÉ)
+   =================================================== */
+
+#app-cover {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+    height: 115px;
+    margin: 80px auto 0 auto;
+}
+
+#player {
+    position: relative;
+    height: 100%;
+    z-index: 3;
+}
+
+#player-track {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    left: 15px;
+    padding: 13px 22px 10px 184px;
+    background-color: #fff7f7;
+    border-radius: 15px 15px 0 0;
+    transition: 0.3s ease top;
+    z-index: 1;
+}
+
+#player-track.active {
+    top: -85px;
+}
+
+#album-name {
+    color: #54576f;
+    font-size: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#track-name {
+    color: #acaebd;
+    font-size: 12px;
+    margin: 2px 0 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#track-time {
+    height: 12px;
+    margin-bottom: 3px;
+}
+
+#current-time { float: left; }
+#track-length { float: right; }
+
+#current-time, #track-length {
+    color: #f86d92;
+    font-size: 11px;
+}
+
+#s-area, #seek-bar {
+    position: relative;
+    height: 4px;
+    border-radius: 4px;
+}
+
+#s-area {
+    background-color: #ffe8ee;
+    cursor: pointer;
+}
+
+#seek-bar {
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 0;
+    background-color: #fd6d94;
+    transition: 0.1s linear width;
+    z-index: 1;
+}
+
+#player-content {
+    position: relative;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 15px;
+    z-index: 2;
+}
+
+/* DISCO Y PORTADA CIRCULAR */
+#album-art {
+    position: absolute;
+    top: -40px;
+    width: 115px;
+    height: 115px;
+    margin-left: 20px;
+    transition: 0.3s ease all;
+    box-shadow: 0 0 0 10px #fff;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#album-art.active {
+    top: -50px;
+    box-shadow: 0 0 0 4px #fff7f7, 0 30px 50px -15px #afb7c1;
+}
+
+#album-art:before {
+    content: '';
+    position: absolute;
+    top: 50%; right: 0; left: 0;
+    width: 20px; height: 20px;
+    margin: -10px auto 0 auto;
+    background-color: #d6dee7;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px #fff;
+    z-index: 2;
+}
+
+#album-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* ⚡ LA ANIMACIÓN DEL VINILO GIRANDO ⚡ */
+#album-art.active img {
+    animation: rotateAlbumArt 3s linear infinite forwards;
+}
+
+@keyframes rotateAlbumArt {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#player-controls {
+    width: 200px;
+    height: 100%;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.button i {
+    color: #d6dee7;
+    font-size: 20px;
+}
+
+.button:hover {
+    background-color: var(--color-orange);
+}
+
+.button:hover i {
+    color: #fff;
+}

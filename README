@@ -1,0 +1,19 @@
+# 🎧 Music Player & Vinyl Spinner - Frontend
+
+Interfaz web moderna, ligera y responsive desarrollada en Vanilla JavaScript. Consume la API del backend alojado en Render para realizar búsquedas unificadas de música y reproducir previews de audio con una estética retro destacada por un **disco de vinilo giratorio**.
+
+## 🚀 Características
+
+* 🔍 **Búsqueda Dinámica:** Muestra resultados organizados en 3 columnas independientes: **Álbumes**, **Artistas** y **Canciones**.
+* 🎛️ **Reproductor Interactivo:** Modal con controles de reproducción (Play/Pause), barra de progreso scrolleable y tiempo en tiempo real.
+* 💿 **Vinilo Giratorio:** Animación CSS personalizada que sincroniza el giro de la portada/disco con el estado del audio.
+* ⚡ **Sin Dependencias:** Construido exclusivamente con HTML5, CSS3 y JS Nativo (sin jQuery, sin iFrames y sin frameworks pesados).
+
+## 📁 Estructura del Proyecto
+
+```text
+frontend/
+├── index.html          # Estructura semántica de la app y el modal
+├── styles.css          # Estilos retro, responsive grid y animación keyframe del vinilo
+├── app.js              # Lógica de peticiones fetch, manipulación del DOM y Audio API
+└── README.md           # Documentación del frontend

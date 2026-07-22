@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Música & Vinilo Player</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Encabezado de Búsqueda -->
+    <header class="contenedorBusqueda">
+        <h1 class="titulobuscador">Buscador <span>De Música</span></h1>
+        <form id="formBuscar" class="search-form">
+            <input type="text" id="buscar" placeholder="Buscar álbum, artista o canción..." required>
+            <button type="submit" id="btnBuscar">Buscar</button>
+        </form>
+    </header>
+
+    <!-- Resultados en 3 Columnas -->
+    <main id="rp-q">
+        <section id="col-albums" class="columna">
+            <h2 class="tituloColumna">Álbumes</h2>
+            <div id="lista-albums" class="lista-resultados">
+                <span class="sin-datos">No hay discos para mostrar</span>
+            </div>
+        </section>
+
+        <section id="col-artistas" class="columna">
+            <h2 class="tituloColumna">Artistas</h2>
+            <div id="lista-artistas" class="lista-resultados">
+                <span class="sin-datos">No hay artistas para mostrar</span>
+            </div>
+        </section>
+
+        <section id="col-canciones" class="columna">
+            <h2 class="tituloColumna">Canciones</h2>
+            <div id="lista-canciones" class="lista-resultados">
+                <span class="sin-datos">No hay canciones para mostrar</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal del Reproductor (El Santuario del Vinilo) -->
+    <div id="modalPlayer" class="popupContenedor">
+        <div class="popup">
+            <button id="btnCerrar" class="btn-cerrar">&times;</button>
+            
+            <div id="app-cover">
+                <div id="player">
+                    <div id="player-track">
+                        <div id="album-name">Cargando...</div>
+                        <div id="track-name">Cargando...</div>
+                        <div id="track-time">
+                            <div id="current-time">00:00</div>
+                            <div id="track-length">00:00</div>
+                        </div>
+                        <div id="s-area">
+                            <div id="ins-time">00:00</div>
+                            <div id="s-hover"></div>
+                            <div id="seek-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="player-content">
+                        <!-- AQUÍ ESTÁ TU VINILO SAGRADO -->
+                        <div id="album-art">
+                            <img id="contenedorAlbumImagen" src="" alt="Portada Álbum" />
+                            <div id="buffer-box">Buffering...</div>
+                        </div>
+                        
+                        <div id="player-controls">
+                            <div class="control">
+                                <div class="button" id="play-pause-button">
+                                    <i class="fas fa-play" id="play-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reproductor HTML5 nativo oculto -->
+            <audio id="audio-element"></audio>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
